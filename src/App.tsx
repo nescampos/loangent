@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import FileUpload from './components/FileUpload';
+import ContractSummaryDisplay from './components/ContractSummaryDisplay';
+import { type ContractSummary } from './types/contract';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [contractSummary, setContractSummary] = useState<ContractSummary | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleAnalysisComplete = (summary: ContractSummary) => {
+    setContractSummary(summary);
+    setError(null);
+  };
+
+  const handleError = (message: string) => {
+    setError(message);
+    setContractSummary(null);
+  };
+
+  const handleLoadingChange = (isLoading: boolean) => {
+    setLoading(isLoading);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      <header className="app-header">
+        <h1>Loan Agreement Analyzer</h1>
+        <p>Upload your loan contract to get a structured summary and understand what you're signing</p>
+      </header>
+
+      <main className="app-main">
+        <FileUpload
+          onAnalysisComplete={handleAnalysisComplete}
+          onError={handleError}
+          onLoadingChange={handleLoadingChange}
+        />
+
+        {loading && (
+          <div className="loading-container">
+            <p>Analyzing your contract with AI...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="error-container">
+            <p>Error: {error}</p>
+          </div>
+        )}
+
+        {contractSummary && !loading && (
+          <div className="results-container">
+            <h2>Contract Summary</h2>
+            <ContractSummaryDisplay summary={contractSummary} />
+          </div>
+        )}
+      </main>
+
+      <footer className="app-footer">
+        <p>Note: This tool provides a summary based on AI analysis. Always consult with a legal professional before signing any contract.</p>
+      </footer>
+    </div>
+  );
 }
 
-export default App
+export default App;
