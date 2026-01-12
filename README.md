@@ -2,6 +2,9 @@
 
 Loangent is a web application that helps users understand complex loan contracts by providing AI-powered summaries and explanations. The application allows users to upload loan agreements in PDF or Word format and receive a structured, easy-to-understand summary of key terms, risks, and conditions.
 
+<img width="1842" height="842" alt="Loangent" src="https://github.com/user-attachments/assets/c7be8e88-2647-428b-b233-6c245e2308c3" />
+
+
 ## Features
 
 - **File Upload**: Supports PDF and Word document uploads (up to 10MB)
