@@ -34,7 +34,7 @@ const ContractAnalyzer: React.FC = () => {
         <button className="back-button" onClick={handleGoBack}>
           ← Back to Home
         </button>
-        <h1>Loan Agreement Analyzer</h1>
+        <h1>Loangent</h1>
         <p>Upload your loan contract to get a structured summary and understand what you're signing</p>
       </header>
       

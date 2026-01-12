@@ -11,7 +11,7 @@ const LandingPage: React.FC = () => {
   return (
     <div className="landing-page">
       <header className="landing-header">
-        <h1>Loan Agreement Analyzer</h1>
+        <h1>Loangent</h1>
       </header>
       
       <main className="landing-main">
